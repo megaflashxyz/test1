@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OpenAi API</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://api.openai.com/v1/engines/davinci/completions?text=Hello%20world&max_tokens=32&temperature=0.7&top_p=1.0"></script>
-    <script type="text/javascript">
-        var text = "Hello world";
-        var max_tokens = 32;
-        var temperature = 0.7;
-        var top_p = 1.0;
+    <div id="result">Please input text to command</div>
+    <input type="text" id="command">
+    <button onclick="getText()">Command</button>
 
-        $.ajax({
-            url: 'https://api.openai.com/v1/engines/davinci/completions',
-            type: 'POST',
-            data: JSON.stringify({text: text, max_tokens: max_tokens, temperature: temperature, top_p: top_p}),
-            headers: {
-                'Authorization': 'Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-                'Content-Type': 'application/json'
-            },
-            success: function(response) {
-                console.log(response);
-            }
-        });
+    <script>
+        function getText() {
+            var text = $("#command").val();
+            $.ajax({
+                url: 'https://api.openai.com/v1/engines/davinci/completions',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer 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',
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({'prompt': text, 'max_tokens': 50}),
+                success: function(response) {
+                    $("#result").html(response.choices[0].text);
+                }
+            });
+        }
     </script>
 </body>
+</html>
