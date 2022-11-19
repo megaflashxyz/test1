@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAi API</title>
+</head>
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://api.openai.com/v1/engines/davinci/completions?text=Hello%20world&max_tokens=32&temperature=0.7&top_p=1.0"></script>
+    <script type="text/javascript">
+        var text = "Hello world";
+        var max_tokens = 32;
+        var temperature = 0.7;
+        var top_p = 1.0;
+
+        $.ajax({
+            url: 'https://api.openai.com/v1/engines/davinci/completions',
+            type: 'POST',
+            data: JSON.stringify({text: text, max_tokens: max_tokens, temperature: temperature, top_p: top_p}),
+            headers: {
+                'Authorization': 'Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                'Content-Type': 'application/json'
+            },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    </script>
+</body>
